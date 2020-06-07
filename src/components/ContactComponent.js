@@ -136,10 +136,8 @@ class Contact extends Component {
                      <Input type="text" id="firstname" name="firstname"
                          placeholder="First Name"
                          value={this.state.firstname}
-                        //  当验证通过时 框体为有效（绿色
-                         valid={errors.firstname === ''}
-                        //  未通过验证 框体无效（红色
-                         invalid={errors.firstname !== ''}
+                        valid={errors.firstname === ''}
+                        invalid={errors.firstname !== ''}
                          onBlur={this.handleBlur('firstname')}
                          onChange={this.handleInputChange} />
                      <FormFeedback>{errors.firstname}</FormFeedback>
