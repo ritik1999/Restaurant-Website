@@ -5,7 +5,7 @@ import {Card,CardImg,Breadcrumb,BreadcrumbItem,
 import {Link} from 'react-router-dom';
 import {LocalForm,Control,Errors} from 'react-redux-form';
 
-    function RenderComments({comments})
+    function RenderComments({comments,addComment,dishId})
     {
         if(comments==null)
         {
@@ -32,7 +32,7 @@ import {LocalForm,Control,Errors} from 'react-redux-form';
                 <ul className="list-unstyled">
                     {cmts}
                 </ul>
-                <CommentForm>
+                <CommentForm dishId={dishId} addComment={addComment}>
 
 
                 </CommentForm>
@@ -85,7 +85,9 @@ import {LocalForm,Control,Errors} from 'react-redux-form';
                 </div>
                 <div className="row">
                     <RenderDish dish={props.dish} />
-                    <RenderComments comments={props.comments} />   
+                    <RenderComments comments={props.comments}
+                    addComment={props.addComment}
+                    dishId={props.dish.id} />   
                 </div>
         </div>
     )
@@ -115,6 +117,8 @@ import {LocalForm,Control,Errors} from 'react-redux-form';
             this.toggleModal();
             console.log('Current State is: ' + JSON.stringify(values));
             alert('Current State is: ' + JSON.stringify(values));
+
+            this.props.addComment(this.props.dishId, values.rating , values.author,values.comment);
         }
         render() {
             return (
@@ -159,15 +163,15 @@ import {LocalForm,Control,Errors} from 'react-redux-form';
                                 </Row>
 
                                 <Row className="form-group">
-                                <Label htmlfor="feedback" md={12}>Your Feedback</Label>
+                                <Label htmlfor="comment" md={12}>Your Feedback</Label>
                                 <Col md={12}>
-                                        <Control.textarea model=".feedback" name="feedback" id="feedback"
+                                        <Control.textarea model=".comment" name="comment" id="comment"
                                         placeholder="Your Comments"
                                         className="form-control"
                                         rows="6"
                                         resize="none"
                                         validators={{required}} />
-                                        <Errors className="text-danger" model=".feedback" show="touched"
+                                        <Errors className="text-danger" model=".comment" show="touched"
                                         messages={{
                                             required : 'Required'
                                         }} />
