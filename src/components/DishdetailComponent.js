@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import {LocalForm,Control,Errors} from 'react-redux-form';
 import {Loading} from './LoadingComponent';
 import {baseUrl} from '../shared/baseUrl';
-    function RenderComments({comments,addComment,dishId})
+    function RenderComments({comments,postcomment,dishId})
     {
         if(comments==null)
         {
@@ -33,7 +33,7 @@ import {baseUrl} from '../shared/baseUrl';
                 <ul className="list-unstyled">
                     {cmts}
                 </ul>
-                <CommentForm dishId={dishId} addComment={addComment}>
+                <CommentForm dishId={dishId} postcomment={postcomment}>
 
 
                 </CommentForm>
@@ -106,7 +106,7 @@ import {baseUrl} from '../shared/baseUrl';
                             <div className="row">
                                 <RenderDish dish={props.dish} />
                                 <RenderComments comments={props.comments}
-                                addComment={props.addComment}
+                                postcomment={props.postcomment}
                                 dishId={props.dish.id} />   
                             </div>
                     </div>
@@ -139,7 +139,7 @@ import {baseUrl} from '../shared/baseUrl';
             console.log('Current State is: ' + JSON.stringify(values));
             alert('Current State is: ' + JSON.stringify(values));
 
-            this.props.addComment(this.props.dishId, values.rating , values.author,values.comment);
+            this.props.postcomment(this.props.dishId, values.rating , values.author,values.comment);
         }
         render() {
             return (
